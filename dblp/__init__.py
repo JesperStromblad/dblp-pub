@@ -30,9 +30,11 @@ def get_pub_data(json):
     for field in publication_data:
         dict_info = {}
         info = field['info']
-        if all (key in info for key in ("authors","url", "title", "type", "venue","year")):  # Some details are not available in dblp e.g., author or venue
-            dict_info['authors'] = info['authors']['author']
-            dict_info['url'] = info['url']
+        if all (key in info for key in ("authors","ee", "title", "type", "venue","year")):  # Some details are not available in dblp e.g., author or venue
+            #dict_info['authors'] = info['authors']['author']
+            list = info['authors']['author']
+            dict_info['authors'] = ','.join(list)
+            dict_info['url'] = info['ee']
             dict_info['title'] = info['title']
             dict_info['type'] = info['type']
             dict_info['where'] = info['venue']
